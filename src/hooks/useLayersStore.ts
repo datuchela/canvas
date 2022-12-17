@@ -1,32 +1,48 @@
 import create from "zustand";
 
-type Layer = {
-  id: number;
-  name: string;
-  z: number;
-  hidden: boolean;
-  ownerId: number;
-};
-
 type LayersStore = {
   layers: Layer[];
   currentLayerId: number;
   addLayer: (layer: Layer) => void;
   removeLayer: (layerId: number) => void;
   setCurrentLayerId: (id: number) => void;
+  changeLayerBackground: (layerId: number, color: string) => void;
+  setLayerData: (layerId: number, data: string) => void;
 };
 
 const initialLayer = {
-  id: 0,
+  id: 1,
   name: "Layer 1",
   z: 1,
   hidden: false,
+  backgroundColor: "#ffffff",
   ownerId: 1,
+};
+
+type OptionalLayerProps = {
+  id?: number;
+  name?: string;
+  data?: string;
+  z?: number;
+  hidden?: boolean;
+  backgroundColor?: string;
+  ownerId?: number;
+};
+
+const findByIdAndUpdate = (
+  layers: Layer[],
+  layerId: number,
+  payload: OptionalLayerProps
+) => {
+  const layersCopy = [...layers];
+  const layerIndex = layersCopy.findIndex((layer) => layer.id === layerId);
+  layersCopy[layerIndex] = { ...layersCopy[layerIndex], ...payload };
+  return layersCopy;
 };
 
 const useLayersStore = create<LayersStore>((set) => ({
   layers: [initialLayer],
-  currentLayerId: 0,
+  currentLayerId: 1,
   addLayer: (layer) =>
     set((state) => ({
       ...state,
@@ -42,15 +58,29 @@ const useLayersStore = create<LayersStore>((set) => ({
       ...state,
       currentLayerId: id,
     })),
+  changeLayerBackground: (layerId, color) =>
+    set((state) => ({
+      ...state,
+      layers: findByIdAndUpdate(state.layers, layerId, {
+        backgroundColor: color,
+      }),
+    })),
+  setLayerData: (layerId, data) =>
+    set((state) => ({
+      ...state,
+      layers: findByIdAndUpdate(state.layers, layerId, { data: data }),
+    })),
 }));
 
 export default useLayersStore;
 
 export const useLayers = () =>
   useLayersStore((state) => ({
-    layers: state.layers,
-    currentLayerId: state.currentLayerId,
-    addLayer: state.addLayer,
-    removeLayer: state.removeLayer,
-    setCurrentLayerId: state.setCurrentLayerId,
+    // layers: state.layers,
+    // currentLayerId: state.currentLayerId,
+    // addLayer: state.addLayer,
+    // removeLayer: state.removeLayer,
+    // setCurrentLayerId: state.setCurrentLayerId,
+    // changeLayerBackground: state.changeLayerBackground,
+    ...state,
   }));
