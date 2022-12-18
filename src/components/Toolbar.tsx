@@ -1,11 +1,45 @@
 import { useLayers } from "../hooks/useLayersStore";
 import { useLine } from "../hooks/useLineStore";
+import { usePreferences } from "../hooks/usePreferStore";
+
+const themes = [
+  "light",
+  "dark",
+  // "cupcake",
+  // "bumblebee",
+  // "emerald",
+  // "corporate",
+  // "synthwave",
+  // "retro",
+  // "cyberpunk",
+  // "valentine",
+  // "halloween",
+  // "garden",
+  // "forest",
+  // "aqua",
+  // "lofi",
+  // "pastel",
+  // "fantasy",
+  // "wireframe",
+  // "black",
+  // "luxury",
+  // "dracula",
+  // "cmyk",
+  // "autumn",
+  // "business",
+  // "acid",
+  // "lemonade",
+  // "night",
+  // "coffee",
+  // "winter",
+];
 
 const Toolbar = () => {
+  const { theme, setTheme } = usePreferences();
   const { currentLayerId, changeLayerBackground } = useLayers();
   const { lineColor, lineWidth, setLineColor, setLineWidth } = useLine();
   return (
-    <header className="px-8 py-4 border-b border-neutral">
+    <header className="px-8 py-4 border-b border-neutral flex items-center justify-between">
       <div className="flex items-center gap-12">
         <input
           type="color"
@@ -27,7 +61,7 @@ const Toolbar = () => {
           />
           <input
             type="range"
-            // className="w-24"
+            className="range range-xs"
             name="lineWidth"
             id="lineWidth"
             min={1}
@@ -48,6 +82,18 @@ const Toolbar = () => {
         >
           Clear
         </button>
+      </div>
+      <div>
+        <select
+          className="select select-bordered select-sm"
+          name="theme"
+          value={theme}
+          onChange={(e) => setTheme(e.target.value)}
+        >
+          {themes.map((themeName) => (
+            <option value={themeName}>{themeName}</option>
+          ))}
+        </select>
       </div>
     </header>
   );
