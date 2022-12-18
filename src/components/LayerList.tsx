@@ -86,7 +86,7 @@ const LayerList = () => {
                 onChange={() => toggleHidden(layer.id, layer.hidden)}
               />
               <img
-                className="aspect-video border border-neutral"
+                className="aspect-video border border-secondary-content"
                 src={layer?.data}
                 width={32}
                 height={18}
