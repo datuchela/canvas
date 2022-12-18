@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Canvas from "./components/Canvas";
-import LayerList from "./components/LayerList";
+import LayerList from "./components/LayerPanel";
 import Toolbar from "./components/Toolbar";
 import { useLayers } from "./hooks/useLayersStore";
 import { usePreferences } from "./hooks/usePreferStore";
