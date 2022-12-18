@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Canvas from "./components/molecules/Canvas";
-import LayerList from "./components/LayerPanel";
+import LayerPanel from "./components/LayerPanel";
 import Toolbar from "./components/Toolbar";
 import { useLayers } from "./hooks/useLayersStore";
 import { usePreferences } from "./hooks/usePreferStore";
@@ -23,7 +23,7 @@ function App() {
             <Canvas key={layer.id} layer={layer} />
           ))}
         </div>
-        <LayerList />
+        <LayerPanel />
       </div>
     </div>
   );

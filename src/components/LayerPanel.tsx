@@ -1,7 +1,7 @@
 import { useLayers } from "../hooks/useLayersStore";
 import Layer from "./molecules/Layer";
 
-const LayerList = () => {
+const LayerPanel = () => {
   const { layers, addLayer, removeLayer, setCurrentLayerId, currentLayerId } =
     useLayers();
 
@@ -40,7 +40,7 @@ const LayerList = () => {
     <div className="flex flex-col gap-4 p-2 w-[12.5%] h-fit border border-neutral rounded-sm">
       <ul>
         {layers?.map((layer) => (
-          <Layer layer={layer} />
+          <Layer key={layer.id} layer={layer} />
         ))}
       </ul>
       <div className="flex items-center justify-end gap-2 p-2 border-t border-neutral">
@@ -61,4 +61,4 @@ const LayerList = () => {
   );
 };
 
-export default LayerList;
+export default LayerPanel;
