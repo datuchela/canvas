@@ -3,8 +3,14 @@ import { useLayers } from "../hooks/useLayersStore";
 
 const LayerList = () => {
   const [input, setInput] = useState("");
-  const { layers, addLayer, removeLayer, setCurrentLayerId, currentLayerId } =
-    useLayers();
+  const {
+    layers,
+    addLayer,
+    removeLayer,
+    setCurrentLayerId,
+    currentLayerId,
+    toggleHidden,
+  } = useLayers();
 
   function handleAddLayer(e: React.FormEvent) {
     e.preventDefault();
@@ -39,16 +45,16 @@ const LayerList = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <form onSubmit={handleAddLayer}>
+      <form onSubmit={handleAddLayer} className="flex items-center gap-2">
         <input
-          className="border border-white p-1"
+          className="input input-bordered input-sm"
           type="text"
           placeholder="New layer name"
           required
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button className="p-1 px-3 border border-white">+</button>
+        <button className="btn btn-sm btn-outline">+</button>
       </form>
       <ul>
         {layers?.map((layer) => (
@@ -60,7 +66,7 @@ const LayerList = () => {
           >
             <li
               className={`flex items-center justify-between gap-2 p-2 pointer-events-none ${
-                layer.id === currentLayerId && "bg-[rgba(255,255,255,0.1)]"
+                layer.id === currentLayerId && "bg-neutral text-primary-content"
               }`}
             >
               <input
@@ -72,6 +78,13 @@ const LayerList = () => {
                 checked={layer.id === currentLayerId}
                 hidden
               />
+              <input
+                className="checkbox checkbox-accent checkbox-sm pointer-events-auto"
+                type="checkbox"
+                name="hidden"
+                checked={!layer.hidden}
+                onChange={() => toggleHidden(layer.id, layer.hidden)}
+              />
               <img
                 className="aspect-video border border-neutral"
                 src={layer?.data}
@@ -80,7 +93,7 @@ const LayerList = () => {
               />
               <span className="flex-1">{layer.name}</span>
               <button
-                className="pointer-events-auto"
+                className="pointer-events-auto text-secondary"
                 onClick={() => handleDeleteLayer(layer.id)}
               >
                 <kbd className="kbd kbd-sm">Del</kbd>
