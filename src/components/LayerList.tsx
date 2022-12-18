@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLayers } from "../hooks/useLayersStore";
 
 const LayerList = () => {
@@ -24,6 +24,19 @@ const LayerList = () => {
     removeLayer(id);
   }
 
+  function handleDeleteKeyPress(e: React.KeyboardEvent<HTMLLabelElement>) {
+    console.log(e);
+    // TODO: Capture key press, and delete item
+
+    // switch (e.key) {
+    //   case "Del":
+    //     break;
+
+    //   default:
+    //     break;
+    // }
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <form onSubmit={handleAddLayer}>
@@ -43,9 +56,10 @@ const LayerList = () => {
             className="cursor-pointer"
             key={layer.id}
             htmlFor={layer.id.toString()}
+            onKeyDown={handleDeleteKeyPress}
           >
             <li
-              className={`flex items-center justify-between gap-2 p-2 ${
+              className={`flex items-center justify-between gap-2 p-2 pointer-events-none ${
                 layer.id === currentLayerId && "bg-[rgba(255,255,255,0.1)]"
               }`}
             >
@@ -66,10 +80,10 @@ const LayerList = () => {
               />
               <span className="flex-1">{layer.name}</span>
               <button
-                className="btn btn-sm btn-outline btn-error text-lg"
+                className="pointer-events-auto"
                 onClick={() => handleDeleteLayer(layer.id)}
               >
-                -
+                <kbd className="kbd kbd-sm">Del</kbd>
               </button>
             </li>
           </label>
