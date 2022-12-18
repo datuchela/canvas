@@ -69,18 +69,9 @@ export const useDraw = (
       return { x, y };
     };
 
-    const updateImageData = () => {
-      const canvas = canvasRef.current;
-      const dataURL = canvas?.toDataURL();
-      setLayerData(layer.id, dataURL ? dataURL : "");
-    };
-
     const mouseUpHandler = () => {
-      console.log("setting state to false");
       setMouseDown(false);
       prevPoint.current = null;
-      console.log("updating image data");
-      updateImageData();
     };
 
     // Add event listeners
@@ -93,6 +84,16 @@ export const useDraw = (
       window.removeEventListener("mouseup", mouseUpHandler);
     };
   }, [onDraw]);
+
+  useEffect(() => {
+    const updateImageData = () => {
+      const canvas = canvasRef.current;
+      const dataURL = canvas?.toDataURL();
+      setLayerData(layer.id, dataURL ? dataURL : "");
+    };
+
+    updateImageData();
+  }, [mouseDown]);
 
   return { canvasRef, onMouseDown, clear };
 };

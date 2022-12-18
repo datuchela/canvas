@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDraw } from "../hooks/useDraw";
 import { useLayers } from "../hooks/useLayersStore";
 import { useLine } from "../hooks/useLineStore";
@@ -9,7 +8,7 @@ type CanvasType = {
 };
 
 const Canvas = ({ layer }: CanvasType) => {
-  const { currentLayerId, setLayerData } = useLayers();
+  const { currentLayerId } = useLayers();
   const { lineWidth, lineColor } = useLine();
   const { canvasRef, onMouseDown } = useDraw(createLine, layer);
 
@@ -22,20 +21,6 @@ const Canvas = ({ layer }: CanvasType) => {
       lineWidth: lineWidth,
     });
   }
-
-  // useEffect(() => {
-  //   const updateImageData = () => {
-  //     const canvas = canvasRef.current;
-  //     if (!canvas) return;
-  //     const dataURL = canvas.toDataURL();
-  //     setLayerData(layer.id, dataURL);
-  //   };
-  //   window.addEventListener("mouseup", updateImageData);
-
-  //   return () => {
-  //     window.removeEventListener("mouseup", updateImageData);
-  //   };
-  // }, [canvasRef]);
 
   return (
     <canvas
