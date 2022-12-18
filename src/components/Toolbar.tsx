@@ -91,7 +91,9 @@ const Toolbar = () => {
           onChange={(e) => setTheme(e.target.value)}
         >
           {themes.map((themeName) => (
-            <option value={themeName}>{themeName}</option>
+            <option key={themeName} value={themeName}>
+              {themeName}
+            </option>
           ))}
         </select>
       </div>

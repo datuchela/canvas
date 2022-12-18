@@ -3,11 +3,7 @@ import { useLayers } from "../../hooks/useLayersStore";
 const Layer = ({ layer }: { layer: Layer }) => {
   const { setCurrentLayerId, currentLayerId, toggleHidden } = useLayers();
   return (
-    <label
-      className="cursor-pointer"
-      key={layer.id}
-      htmlFor={layer.id.toString()}
-    >
+    <label className="cursor-pointer" htmlFor={layer.id.toString()}>
       <li
         className={`flex items-center justify-between gap-4 p-2 ${
           layer.id === currentLayerId && "bg-neutral text-primary-content"
