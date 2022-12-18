@@ -8,6 +8,7 @@ type LayersStore = {
   setCurrentLayerId: (id: number) => void;
   changeLayerBackground: (layerId: number, color: string) => void;
   setLayerData: (layerId: number, data: string) => void;
+  toggleHidden: (layerId: number, prevState: boolean) => void;
 };
 
 const initialLayer = {
@@ -69,6 +70,11 @@ const useLayersStore = create<LayersStore>((set) => ({
     set((state) => ({
       ...state,
       layers: findByIdAndUpdate(state.layers, layerId, { data: data }),
+    })),
+  toggleHidden: (layerId, prevState) =>
+    set((state) => ({
+      ...state,
+      layers: findByIdAndUpdate(state.layers, layerId, { hidden: !prevState }),
     })),
 }));
 
