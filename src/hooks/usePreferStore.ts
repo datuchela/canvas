@@ -6,7 +6,7 @@ type PreferStore = {
 };
 
 const usePreferStore = create<PreferStore>((set) => ({
-  theme: "light",
+  theme: "dark",
   setTheme: (newTheme) =>
     set((state) => ({
       ...state,
