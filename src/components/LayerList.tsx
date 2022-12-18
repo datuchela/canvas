@@ -39,8 +39,16 @@ const LayerList = () => {
       </form>
       <ul>
         {layers?.map((layer) => (
-          <label key={layer.id} htmlFor={layer.id.toString()}>
-            <li className="flex items-center justify-between gap-2">
+          <label
+            className="cursor-pointer"
+            key={layer.id}
+            htmlFor={layer.id.toString()}
+          >
+            <li
+              className={`flex items-center justify-between gap-2 p-2 ${
+                layer.id === currentLayerId && "bg-[rgba(255,255,255,0.1)]"
+              }`}
+            >
               <input
                 type="radio"
                 name="currentLayerId"
@@ -48,6 +56,7 @@ const LayerList = () => {
                 value={layer.id}
                 onChange={() => setCurrentLayerId(layer.id)}
                 checked={layer.id === currentLayerId}
+                hidden
               />
               <img
                 className="aspect-video border border-neutral"
@@ -57,7 +66,7 @@ const LayerList = () => {
               />
               <span className="flex-1">{layer.name}</span>
               <button
-                className="border px-2 border-white"
+                className="btn btn-sm btn-outline btn-error text-lg"
                 onClick={() => handleDeleteLayer(layer.id)}
               >
                 -

@@ -37,13 +37,13 @@ const Toolbar = () => {
           />
         </div>
         <button
-          className="px-2 border border-white"
+          className="btn btn-sm"
           onClick={() => changeLayerBackground(currentLayerId, lineColor)}
         >
           Fill
         </button>
         <button
-          className="px-2 border border-white"
+          className="btn btn-sm"
           onClick={() => changeLayerBackground(currentLayerId, lineColor)}
         >
           Clear
