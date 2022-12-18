@@ -9,7 +9,7 @@ const Layer = ({ layer }: { layer: Layer }) => {
       htmlFor={layer.id.toString()}
     >
       <li
-        className={`flex items-center justify-between gap-2 p-2 ${
+        className={`flex items-center justify-between gap-4 p-2 ${
           layer.id === currentLayerId && "bg-neutral text-primary-content"
         }`}
       >
