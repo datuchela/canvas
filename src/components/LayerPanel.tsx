@@ -1,31 +1,9 @@
-import React, { useState } from "react";
 import { useLayers } from "../hooks/useLayersStore";
 import Layer from "./molecules/Layer";
 
 const LayerList = () => {
-  const [input, setInput] = useState("");
-  const {
-    layers,
-    addLayer,
-    removeLayer,
-    setCurrentLayerId,
-    currentLayerId,
-    toggleHidden,
-  } = useLayers();
-
-  function handleAddLayer(e: React.FormEvent) {
-    e.preventDefault();
-    const newLayer = {
-      id: layers[0]?.id + 1 || 1,
-      name: input,
-      z: layers[0]?.z + 1 || 1,
-      hidden: false,
-      ownerId: 1,
-    };
-    addLayer(newLayer);
-    setInput("");
-    setCurrentLayerId(newLayer.id);
-  }
+  const { layers, addLayer, removeLayer, setCurrentLayerId, currentLayerId } =
+    useLayers();
 
   function handleAddEmptyLayer() {
     const newLayerId = layers[0]?.id + 1 || 1;
@@ -59,18 +37,7 @@ const LayerList = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <form onSubmit={handleAddLayer} className="flex items-center gap-2">
-        <input
-          className="input input-bordered input-sm"
-          type="text"
-          placeholder="New layer name"
-          required
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button className="btn btn-sm btn-outline">+</button>
-      </form>
+    <div className="flex flex-col gap-4 p-2 w-[12.5%] h-fit border border-neutral rounded-sm">
       <ul>
         {layers?.map((layer) => (
           <Layer layer={layer} />
@@ -81,7 +48,7 @@ const LayerList = () => {
           className="pointer-events-auto text-secondary"
           onClick={() => handleAddEmptyLayer()}
         >
-          <kbd className="kbd kbd-sm">+</kbd>
+          <kbd className="kbd kbd-sm">Add</kbd>
         </button>
         <button
           className="pointer-events-auto text-secondary"
