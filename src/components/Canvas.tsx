@@ -33,6 +33,7 @@ const Canvas = ({ layer }: CanvasType) => {
       height={1080}
       ref={canvasRef}
       onMouseDown={onMouseDown}
+      hidden={layer.hidden}
     />
   );
 };
