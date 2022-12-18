@@ -45,7 +45,7 @@ export const useDraw = (
     };
   }, [layer.backgroundColor]);
 
-  //
+  // Handles Mouse for drawing purposes
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (!mouseDown) return;
@@ -85,14 +85,16 @@ export const useDraw = (
     };
   }, [onDraw]);
 
+  // Updates canvas data whenever user stops drawing
   useEffect(() => {
     const updateImageData = () => {
       const canvas = canvasRef.current;
+      if (!canvas) return;
       const dataURL = canvas?.toDataURL();
       setLayerData(layer.id, dataURL ? dataURL : "");
     };
 
-    updateImageData();
+    !mouseDown && updateImageData();
   }, [mouseDown]);
 
   return { canvasRef, onMouseDown, clear };
