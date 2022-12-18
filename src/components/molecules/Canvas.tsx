@@ -1,7 +1,7 @@
-import { useDraw } from "../hooks/useDraw";
-import { useLayers } from "../hooks/useLayersStore";
-import { useLine } from "../hooks/useLineStore";
-import { drawLine } from "../utils/drawLine";
+import { useDraw } from "../../hooks/useDraw";
+import { useLayers } from "../../hooks/useLayersStore";
+import { useLine } from "../../hooks/useLineStore";
+import { drawLine } from "../../utils/drawLine";
 
 type CanvasType = {
   layer: Layer;
