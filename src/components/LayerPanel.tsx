@@ -25,7 +25,7 @@ const LayerPanel = () => {
   }
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyPress);
+    window.addEventListener("keydown", handleKeyPress, { once: true });
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
@@ -36,6 +36,12 @@ const LayerPanel = () => {
       case "Delete":
         if (!currentLayerId) return;
         handleDeleteLayer(currentLayerId);
+        break;
+
+      case "z":
+        if (!e.ctrlKey) return;
+        // TODO: implement ctrl+z functionality
+        console.log("should revert back");
         break;
 
       default:
