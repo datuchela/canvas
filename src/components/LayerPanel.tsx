@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { useLayers } from "../hooks/useLayersStore";
 import Layer from "./molecules/Layer";
 
 const LayerPanel = () => {
-  const { layers, addLayer, removeLayer, setCurrentLayerId, currentLayerId } =
-    useLayers();
+  const { layers, addLayer, removeLayer, setCurrentLayerId, currentLayerId } = useLayers();
 
   function handleAddEmptyLayer() {
     const newLayerId = layers[0]?.id + 1 || 1;
@@ -21,19 +21,26 @@ const LayerPanel = () => {
 
   function handleDeleteLayer(id: number) {
     removeLayer(id);
+    setCurrentLayerId(null);
   }
 
-  function handleDeleteKeyPress(e: React.KeyboardEvent<HTMLLabelElement>) {
-    console.log(e);
-    // TODO: Capture key press, and delete item
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [currentLayerId]);
 
-    // switch (e.key) {
-    //   case "Del":
-    //     break;
+  function handleKeyPress(e: KeyboardEvent) {
+    switch (e.key) {
+      case "Delete":
+        if (!currentLayerId) return;
+        handleDeleteLayer(currentLayerId);
+        break;
 
-    //   default:
-    //     break;
-    // }
+      default:
+        break;
+    }
   }
 
   return (
@@ -52,7 +59,7 @@ const LayerPanel = () => {
         </button>
         <button
           className="pointer-events-auto text-secondary"
-          onClick={() => handleDeleteLayer(currentLayerId)}
+          onClick={() => currentLayerId && removeLayer(currentLayerId)}
         >
           <kbd className="kbd kbd-sm">Del</kbd>
         </button>

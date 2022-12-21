@@ -2,10 +2,10 @@ import create from "zustand";
 
 type LayersStore = {
   layers: Layer[];
-  currentLayerId: number;
+  currentLayerId: number | null;
   addLayer: (layer: Layer) => void;
   removeLayer: (layerId: number) => void;
-  setCurrentLayerId: (id: number) => void;
+  setCurrentLayerId: (id: number | null) => void;
   changeLayerBackground: (layerId: number, color: string) => void;
   setLayerData: (layerId: number, data: string) => void;
   toggleHidden: (layerId: number, prevState: boolean) => void;
@@ -30,11 +30,7 @@ type OptionalLayerProps = {
   ownerId?: number;
 };
 
-const findByIdAndUpdate = (
-  layers: Layer[],
-  layerId: number,
-  payload: OptionalLayerProps
-) => {
+const findByIdAndUpdate = (layers: Layer[], layerId: number, payload: OptionalLayerProps) => {
   const layersCopy = [...layers];
   const layerIndex = layersCopy.findIndex((layer) => layer.id === layerId);
   layersCopy[layerIndex] = { ...layersCopy[layerIndex], ...payload };
