@@ -72,15 +72,9 @@ const Toolbar = () => {
         </div>
         <button
           className="btn btn-sm"
-          onClick={() => changeLayerBackground(currentLayerId, lineColor)}
+          onClick={() => currentLayerId && changeLayerBackground(currentLayerId, lineColor)}
         >
           Fill
-        </button>
-        <button
-          className="btn btn-sm"
-          onClick={() => changeLayerBackground(currentLayerId, lineColor)}
-        >
-          Clear
         </button>
       </div>
       <div>
