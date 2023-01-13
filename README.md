@@ -1,3 +1,3 @@
 # canvas-io
 
-Multi-layer canvas drawing app with socket.io integration
+Multi-layer canvas drawing app with socket.io integration (in progress)
