@@ -25,12 +25,7 @@ const Layer = ({ layer }: { layer: Layer }) => {
           checked={!layer.hidden}
           onChange={() => toggleHidden(layer.id, layer.hidden)}
         />
-        <img
-          className="aspect-video border border-secondary-content"
-          src={layer?.data}
-          width={32}
-          height={18}
-        />
+        <img className="border border-secondary-content max-w-[32px] max-h-8" src={layer?.data} />
         {true ? (
           <span className="flex-1">{layer.name}</span>
         ) : (

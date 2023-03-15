@@ -58,13 +58,13 @@ const LayerPanel = () => {
       </ul>
       <div className="flex items-center justify-end gap-2 p-2 border-t border-neutral">
         <button
-          className="pointer-events-auto text-secondary"
+          className="pointer-events-auto text-secondary-content"
           onClick={() => handleAddEmptyLayer()}
         >
           <kbd className="kbd kbd-sm">Add</kbd>
         </button>
         <button
-          className="pointer-events-auto text-secondary"
+          className="pointer-events-auto text-secondary-content"
           onClick={() => currentLayerId && removeLayer(currentLayerId)}
         >
           <kbd className="kbd kbd-sm">Del</kbd>

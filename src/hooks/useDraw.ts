@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLayers } from "./useLayersStore";
 
-export const useDraw = (
-  onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void,
-  layer: Layer
-) => {
+export const useDraw = (onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void, layer: Layer) => {
   //useLayers
   const { setLayerData } = useLayers();
 
