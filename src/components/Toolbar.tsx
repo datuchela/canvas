@@ -3,7 +3,7 @@ import { useLine } from "../hooks/useLineStore";
 import { usePreferences } from "../hooks/usePreferStore";
 
 const themes = [
-	"light",
+	// "light",
 	"dark",
 	// "cupcake",
 	// "bumblebee",
@@ -18,7 +18,7 @@ const themes = [
 	// "forest",
 	// "aqua",
 	// "lofi",
-	// "pastel",
+	"pastel",
 	// "fantasy",
 	"wireframe",
 	// "black",
